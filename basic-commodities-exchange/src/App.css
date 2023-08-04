@@ -1,38 +1,67 @@
-.App {
+/* App.css */
+
+/* Set the page background */
+body {
+  background-color: #232855;
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+}
+
+/* Define the color scheme */
+/* global variables that can be accessed and used throughout the stylesheets */
+:root {
+  --color-primary: #232855;
+  --color-secondary: #215B63;
+  --color-tertiary: #5FCC9C;
+  --color-quaternary: #AAFFC7;
+  --color-primary-rgb: rgb(35, 40, 85);
+  --color-secondary-rgb: rgb(33, 91, 99);
+  --color-tertiary-rgb: rgb(95, 204, 156);
+  --color-quaternary-rgb: rgb(170, 255, 199);
+}
+
+.commodity-list-container {
+  background-color: var(--color-primary);
   text-align: center;
+  padding: 20px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.commodity-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.commodity-box {
+  background-color: var(--color-quaternary);
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: background-color 0.3s ease-in-out;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.commodity-box:hover {
+  background-color: var(--color-secondary);
+}
+
+.button {
+  background-color: var(--color-quaternary);
   color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
 }
 
-.App-link {
-  color: #61dafb;
+.button:hover {
+  background-color: var(--color-quaternary);
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+@media (max-width: 768px) {
+  .commodity-grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   }
 }
