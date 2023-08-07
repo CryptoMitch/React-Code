@@ -1,10 +1,13 @@
+// Named export
+import { Select } from "./Select"
 
 function App() {
-  return <h1>Hi</h1>
+  // Wrap the JSX elements with a fragment to provide parent element 
+  return (
+  <>
+    <Select />
+  </>
+  )
 }
-
-
-
-// Create select component that supports multiple select options
 
 export default App
