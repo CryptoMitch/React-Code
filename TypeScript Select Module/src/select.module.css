@@ -1,5 +1,14 @@
-.container{
-    background: blue;
-    width: 100px;
-    height: 100px;
+.container {
+   /* Enables us to absolutely position our list elements after this element */
+    position: relative;
+    width: 20em;
+    min-height: 1.5em; /* we want thes elements to wrap onto new lines */
+    border: .05em solid #777;
+    display: flex;
+    align-items: center;
+    gap: .5em;
+    padding: .5em;
+    border-radius: .25em;
+    outline: none;
+
 }
