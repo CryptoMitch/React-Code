@@ -4,7 +4,7 @@ import styles from "./select.module.css"
 // A type to support the value option
 type SelectOption = {
     label: string
-    value: any
+    value: number;
 }
 
 // Object type representing properties used to pass data and functions into React component
@@ -17,12 +17,12 @@ type SelectProps ={
 export function Select({ value, onChange, options }: SelectProps) {
         // Wrapper for the entire component pulling styles from select.module.css
         return (
-        <div className={styles.container}>
-          <span className={styles.value}>Value</span>
+        <div tabIndex={0} className={styles.container}>
+          <span className={styles.value}>{value?.label}</span>
           <button className={styles["clear-btn"]}>&times;</button>
           <div className={styles.divider}></div>
-          <div className={styles.carat}></div>
-          <ul className={styles.options}>
+          <div className={styles.caret}></div>
+          <ul className={`${styles.options} ${styles.show}`}>
             {options.map(option => (
                 <li key ={option.label} className={styles.option}>
                     {option.label}
