@@ -1,5 +1,5 @@
 // This code is inspired by the Tutorial by Web Dev Simplified - https://www.youtube.com/watch?v=bAJlYgeovlg
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import styles from "./select.module.css"
 
 
@@ -34,6 +34,11 @@ export function Select({ value, onChange, options }: SelectProps) {
     function isOptionSelected(option: SelectOption) { 
         return option === value
     }
+
+    // everytime we open the dropdown, reset the highlighted index to 0
+    useEffect(() => {
+        if (isOpen) setHighlightedIndex(0)
+    }, [isOpen])
 
         // Wrapper for the entire component using styles from select.module.css
     return (
