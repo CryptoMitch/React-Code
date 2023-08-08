@@ -6,17 +6,26 @@ import styles from "./select.module.css"
 // A type to support the value option
 type SelectOption = {
     label: string
-    value: number;
+    value: string | number
+}
+type MultipleSelectProps = {
+    multiple: true
+    value: SelectOption[]
+    onChange: (value: SelectOption[]) => void
+}
+
+type SingleSelectProps = {
+    multiple?: false
+    value?: SelectOption
+    onChange: (value: SelectOption | undefined) => void
 }
 
 // Object type representing properties used to pass data and functions into React component
 type SelectProps ={
  options: SelectOption[] // Options is an array of SelectOptions
- value?: SelectOption // Value is a single SelectOption. The question mark reprents the value as an optional field.
- onChange: (value: SelectOption | undefined) => void // onChange is a function that passes in a value. It can either be an option or undefined.Void function returns nothing
 }
 
-export function Select({ value, onChange, options }: SelectProps) {
+export function Select({ multiple, value, onChange, options }: SelectProps) {
     // State variable to control the dropdown open/close state
     const [isOpen, setIsOpen] = useState(false)
     // State variable for highlighted index
@@ -28,7 +37,8 @@ export function Select({ value, onChange, options }: SelectProps) {
     }
 
     function selectOption(option: SelectOption) {
-        onChange(option)
+        // if the value is the same as the selected don't call onchange event
+        if (option !== value ) onChange(option)
     }
 
     function isOptionSelected(option: SelectOption) { 
@@ -74,7 +84,7 @@ export function Select({ value, onChange, options }: SelectProps) {
                         setIsOpen(false)
                     }}
                     onMouseEnter={()=> setHighlightedIndex(index)} 
-                    key={option.label} 
+                    key={option.value} 
                     className={`${styles.option} ${
                         isOptionSelected(option) ? styles.selected : "" 
                     } ${index === highlightedIndex ? styles.highlighted : ""}`}
