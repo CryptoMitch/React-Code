@@ -18,9 +18,18 @@ type SelectProps ={
 
 export function Select({ value, onChange, options }: SelectProps) {
     // State variable to control the dropdown open/close state
-    const [isOpen, setIsOpen] = useState(true)
+    const [isOpen, setIsOpen] = useState(false)
+
+    function clearOptions() {
+        // Clear the dropdown contents
+        onChange(undefined)
+    }
+
+    function selectOption(option: SelectOption) {
+        onChange(option)
+    }
         // Wrapper for the entire component using styles from select.module.css
-        return (
+    return (
         <div 
         // when item loses focus
         onBlur={() => setIsOpen(false)}
@@ -32,12 +41,28 @@ export function Select({ value, onChange, options }: SelectProps) {
             className={styles.container}
         >
           <span className={styles.value}>{value?.label}</span>
-          <button className={styles["clear-btn"]}>&times;</button>
+          <button onClick ={e => {
+            // Prevent events bubbling up the DOM
+            e.stopPropagation()
+            clearOptions()
+          }} 
+            className={styles["clear-btn"]}
+            >
+                &times;
+            </button>
           <div className={styles.divider}></div>
           <div className={styles.caret}></div>
           <ul className={`${styles.options} ${isOpen ? styles.show : ""}`}>
             {options.map(option => (
-                <li key ={option.label} className={styles.option}>
+                <li 
+                    onClick={e => {
+                        e.stopPropagation()
+                        selectOption(option)
+                        setIsOpen(false)
+                    }} 
+                    key={option.label} 
+                    className={styles.option}
+                >
                     {option.label}
                 </li>
             ))}
