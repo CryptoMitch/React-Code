@@ -15,9 +15,11 @@ function App() {
   return (
     <div className="App">
       <h1>Mitch's Counter App</h1>
-      <p>Current Count: {count}</p>
-      <button onClick={increment}>Increment</button>
-      <button onClick={decrement}>Decrement</button>
+      <p className="counter">Current Count: {count}</p>
+      <div className='button-container'>
+        <button className="button" onClick={increment}><span className="keyline"></span>Increment</button>
+        <button className="button secondary" onClick={decrement}><span className="keyline"></span>Decrement</button>
+      </div>
     </div>
   );
 }
