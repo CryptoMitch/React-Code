@@ -23,7 +23,7 @@ type SingleSelectProps = {
 // Object type representing properties used to pass data and functions into React component
 type SelectProps ={
  options: SelectOption[] // Options is an array of SelectOptions
-}
+} & (SingleSelectProps | MultipleSelectProps) // Use one of these SelectProps options
 
 export function Select({ multiple, value, onChange, options }: SelectProps) {
     // State variable to control the dropdown open/close state
@@ -33,12 +33,22 @@ export function Select({ multiple, value, onChange, options }: SelectProps) {
 
     function clearOptions() {
         // Clear the dropdown contents
-        onChange(undefined)
+        multiple ? onChange ([]) : onChange (undefined)
     }
 
     function selectOption(option: SelectOption) {
         // if the value is the same as the selected don't call onchange event
+        if (multiple) {
+            if (value.includes(option)){
+                // Case of selecting the same option and adding it to the list
+                onChange(value.filter(o => o !== option))
+            } else {
+                //spread operator
+                onChange([...value, option])
+            }
+        } else {
         if (option !== value ) onChange(option)
+        }
     }
 
     function isOptionSelected(option: SelectOption) { 
