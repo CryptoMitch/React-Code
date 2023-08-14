@@ -1,0 +1,104 @@
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import { TextStyled } from "../styling_template/Text";
+import MitchPortfolioFooterLogo from "../../images/mitchportfolio_footer_logo.svg";
+
+// Social media icons
+import discord from "../../images/socialmedia/discord.svg";
+import facebook from "../../images/socialmedia/facebook.svg";
+import instagram from "../../images/socialmedia/instagram.svg";
+import telegram from "../../images/socialmedia/telegram.svg";
+import twitter from "../../images/socialmedia/twitter.svg";
+
+class Footer extends Component {
+  constructor(props) {
+    super(props);
+    this.dropDownRef = React.createRef();
+    this.state = {
+      showDropDownMenu: false,
+    };
+    this.dropdownListener();
+  }
+
+  dropdownListener = () => {
+    document.addEventListener("mousedown", (event) => {
+      if (this.dropDownRef.current !== null) {
+        if (!this.dropDownRef.current.contains(event.target)) {
+          if (this.state.showDropDownMenu) {
+            this.setState({
+              showDropDownMenu: false,
+            });
+          }
+        }
+      } else if (this.state.showDropDownMenu) {
+        this.setState({
+          showDropDownMenu: false,
+        });
+      }
+    });
+  };
+
+  showDropDownMenu = () => {
+    this.setState((prevState) => ({
+      showDropDownMenu: !prevState.showDropDownMenu,
+    }));
+  };
+
+  render() {
+    return (
+      <footer className="footer">
+        <div className="container">
+          <div className="row">
+            <div className="col-12 col-sm-8 col-md-6 col-lg-6 col-xl-4 order-4 order-md-1 order-lg-4 order-xl-1">
+              <div className="footer__logo">
+                {/* <img src={"/images/footer_mitchportfolio_logo.png"} alt="MitchPortfolio Logo" /> */}
+              </div>
+            </div>
+            <div className="footer_social_media_icons">
+              <img
+                style={{ width: "190px" }}
+                src={MitchPortfolioFooterLogo}
+                alt="MitchPortfolio Logo"
+                className="footer_logo"
+              />
+              <div style={{ display: "flex", gap: 10, alignItems: "center" }}>
+                <p
+                  style={{
+                    margin: 0,
+                    color: "white",
+                    fontFamily: "Founders Grotesk",
+                  }}
+                >
+                  Follow Us
+                </p>
+                <div className="socialmedia">
+                  <a
+                    href="https://discord.gg/mitchportfolio"
+                    target="_blank"
+                    className="sc-lbOyJj socialmedia_icon"
+                  >
+                    {/* Discord icon */}
+                  </a>
+                  {/* Other social media icons */}
+                </div>
+              </div>
+            </div>
+            <div className="footer-content">
+              {/* Content for the footer */}
+            </div>
+            <div className="footer-container">
+              <img src={"/images/filename.svg"} alt="MitchPortfolio Logo" />
+            </div>
+          </div>
+        </div>
+      </footer>
+    );
+  }
+}
+
+export default Footer;
+
+
+
+
+
